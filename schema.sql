@@ -1,0 +1,1 @@
+CREATE TABLE citations (id SERIAL PRIMARY KEY,  citation_name TEXT, title TEXT, published INT, author TEXT);
