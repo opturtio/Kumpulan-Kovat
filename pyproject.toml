@@ -1,14 +1,15 @@
 [tool.poetry]
 name = "bibtex-generator"
 version = "0.1.0"
-description = "Web app for generating bibtex-files"
-authors = ["Your Name <you@example.com>"]
+description = ""
+authors = ["akskokki <akseli.kokki@gmail.com>"]
 readme = "README.md"
 packages = [{include = "bibtex_generator"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
-flask = "^2.2.2"
+Flask = "^2.2.2"
+robot = "^20071211"
 
 
 [build-system]
