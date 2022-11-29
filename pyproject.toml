@@ -10,6 +10,8 @@ packages = [{include = "bibtex_generator"}]
 python = "^3.8"
 Flask = "^2.2.2"
 robot = "^20071211"
+psycopg = "^3.1.4"
+flask-sqlalchemy = "^3.0.2"
 
 
 [build-system]
