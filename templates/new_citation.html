@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block title %}New citation{% endblock %}
+{% block content %}
+<h2>Create new citation</h2>
+<form action="/new_citation" method="POST">
+Citation name: <br><input type="text" name="citation_name">
+<p>
+Title: <br><input type="text" name="title">
+<p>
+Published: <br><input type="text" name="published">
+<p>
+Author: <br><input type="text" name="author">
+<p>
+<input type="submit" value="Create new">
+</form>
+<a href="/">Palaa etusivulle</a>
+{% endblock %}
