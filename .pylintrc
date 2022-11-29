@@ -1,0 +1,33 @@
+[MASTER]
+
+ignore=tests
+
+[MESSAGE CONTROL]
+
+disable=missing-module-docstring,
+        missing-function-docstring,
+        missing-class-docstring,
+        wrong-import-position,
+        unused-import
+
+[FORMAT]
+
+max-line-length=100
+
+[REFACTORING]
+
+max-nested-blocks=3
+
+[SIMILARITIES]
+
+ignore-comments=yes
+ignore-imports=yes
+min-similarity-lines=4
+
+[BASIC]
+
+argument-naming-style=snake_case
+attr-naming-style=snake_case
+class-naming-style=PascalCase
+const-naming-style=UPPER_CASE
+function-naming-style=snake_case
