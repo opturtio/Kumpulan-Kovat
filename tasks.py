@@ -2,7 +2,7 @@ from invoke import task
 
 @task
 def start(ctx):
-    with ctx.cd("src/services"):
+    with ctx.cd("src"):
         ctx.run("flask run")
 
 @task
