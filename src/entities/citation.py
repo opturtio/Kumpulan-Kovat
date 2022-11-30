@@ -5,6 +5,7 @@ class Citation(object):
     and the getter, setter and deleter methods manipulate the _data dictionary.
     The attributes can also be predefined in the constructor using keyword arguments.
     """
+
     def __init__(self, **kwargs):
         self._data = kwargs
         for name, value in kwargs.items():
