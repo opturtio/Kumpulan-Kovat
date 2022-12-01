@@ -12,7 +12,9 @@ disable=missing-module-docstring,
         redefined-outer-name,
         inconsistent-return-statements,
         no-else-return,
-        cyclic-import
+        cyclic-import,
+        W0622
+
 
 ignored-classes=scoped_session
 
@@ -31,9 +33,12 @@ ignore-imports=yes
 min-similarity-lines=4
 
 [BASIC]
-
+good-names=id
 argument-naming-style=snake_case
 attr-naming-style=snake_case
 class-naming-style=PascalCase
 const-naming-style=UPPER_CASE
 function-naming-style=snake_case
+
+[VARIABLES]
+redefining-builtins-modules=id

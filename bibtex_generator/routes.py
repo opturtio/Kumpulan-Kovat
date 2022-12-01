@@ -15,7 +15,8 @@ def root():
 
 @app.route("/citations", methods=["GET"])
 def citations():
-    result = db.session.execute("SELECT citation_name, title, published, author FROM citations")
+    result = db.session.execute(
+        "SELECT id, citation_name, title, published, author FROM citations")
     citations = result.fetchall()
     return render_template("citations.html", count=len(citations), citations=citations)
 
@@ -34,3 +35,11 @@ def new_citation():
         citation_service.create_citation(citation_name, title, published, author)
 
         return redirect_to_new_citation()
+
+
+@app.route("/citations/<int:id>")
+def recipe(id):
+    sql = "SELECT id, citation_name, title, published, author FROM citations WHERE id=:id"
+    result = db.session.execute(sql, {"id": id})
+    citation = result.fetchone()
+    return render_template("citation.html", id=id, citation=citation)
