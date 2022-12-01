@@ -1,3 +1,6 @@
+{% extends "layout.html" %}
+{% block title %}Citations{% endblock %}
+{% block content %}
 <h1> Current citation amount: {{ count }}</h1>
 
 <hr>
@@ -14,3 +17,4 @@ Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a>
 {% endfor %}
 
 <a href="/">Return</a>
+{% endblock %}
