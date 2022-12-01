@@ -1,7 +1,10 @@
 from flask import render_template, request, redirect, abort, session
 from app import app
 from db import db
-from services.citation_service import citation_service
+from services.citation_service import CitationService
+from repositories.citation_repository import CitationRepository
+
+citation_service = CitationService(CitationRepository(db))
 
 
 def redirect_to_new_citation():
@@ -15,9 +18,7 @@ def root():
 
 @app.route("/citations", methods=["GET"])
 def citations():
-    result = db.session.execute(
-        "SELECT id, citation_name, title, published, author FROM citations")
-    citations = result.fetchall()
+    citations = citation_service.get_citations()
     return render_template("citations.html", count=len(citations), citations=citations)
 
 
@@ -32,14 +33,13 @@ def new_citation():
         published = request.form["published"]
         author = request.form["author"]
 
-        citation_service.create_citation(citation_name, title, published, author)
+        citation_service.create_citation(
+            citation_name, title, published, author)
 
         return redirect_to_new_citation()
 
 
 @app.route("/citations/<int:id>")
 def recipe(id):
-    sql = "SELECT id, citation_name, title, published, author FROM citations WHERE id=:id"
-    result = db.session.execute(sql, {"id": id})
-    citation = result.fetchone()
+    citation = citation_service.get_citation(id)
     return render_template("citation.html", id=id, citation=citation)

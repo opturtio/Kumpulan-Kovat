@@ -16,6 +16,7 @@ pylint = "^2.15.7"
 psycopg2-binary = "^2.9.5"
 python-dotenv = "^0.21.0"
 invoke = "^1.7.3"
+pytest = "^7.2.0"
 
 
 [tool.poetry.group.dev.dependencies]
