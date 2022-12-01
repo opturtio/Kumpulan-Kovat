@@ -2,12 +2,14 @@
 
 <hr>
 {% for citation in citations %}
-Citation: {{citation.citation_name}}
+Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a>
 <ul>
     <li> Title: {{citation.title}} 
     <li> Published: {{citation.published}}
     <li> Author: {{citation.author}}
 </ul>
+
+<hr>
 <hr>
 {% endfor %}
 

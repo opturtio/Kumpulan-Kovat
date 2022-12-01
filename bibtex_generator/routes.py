@@ -11,7 +11,7 @@ def root():  # nimen voi vaihtaa
 @app.route("/citations", methods=["GET"])
 def citations():
     result = db.session.execute(
-        "SELECT citation_name, title, published, author FROM citations")
+        "SELECT id, citation_name, title, published, author FROM citations")
     citations = result.fetchall()
     return render_template("citations.html", count=len(citations), citations=citations)
 
@@ -33,3 +33,11 @@ def new_citation():
                            "title": title, "published": published, "author": author})
         db.session.commit()
         return redirect("/new_citation")
+
+
+@app.route("/citations/<int:id>")
+def recipe(id):
+    sql = "SELECT id, citation_name, title, published, author FROM citations WHERE id=:id"
+    result = db.session.execute(sql, {"id": id})
+    citation = result.fetchone()
+    return render_template("citation.html", id=id, citation=citation)
