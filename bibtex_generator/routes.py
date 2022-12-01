@@ -31,7 +31,7 @@ def new_citation():
         title = request.form["title"]
         published = request.form["published"]
         author = request.form["author"]
-    
+
         citation_service.create_citation(citation_name, title, published, author)
 
         return redirect_to_new_citation()
