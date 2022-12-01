@@ -9,7 +9,7 @@ def redirect_to_new_citation():
 
 
 @app.route("/", methods=["GET"])
-def root(): #nimen voi vaihtaa
+def root():
     return render_template("index.html")
 
 
@@ -24,7 +24,7 @@ def citations():
 def new_citation():
     if request.method == "GET":
         return render_template("new_citation.html")
-    
+
     if request.method == "POST":
         citation_name = request.form["citation_name"]
         title = request.form["title"]
