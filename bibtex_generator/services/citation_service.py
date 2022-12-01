@@ -10,6 +10,8 @@ class CitationService:
     def create_citation(self, citation_name, title, published, author):
         self._citation_repository.insert_citation(citation_name, title, published, author)
 
+    def something(self):
+        pass
 
 
 
