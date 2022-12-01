@@ -1,8 +1,14 @@
-<h1> Olemassa olevien lähteiden määrä: {{ count }}</h1>
-{% for citation in citations %}
+<h1> Current citation amount: {{ count }}</h1>
 
-{{citation.citation_name}} {{citation.title}} {{citation.published}} {{citation.author}}
+<hr>
+{% for citation in citations %}
+Citation: {{citation.citation_name}}
+<ul>
+    <li> Title: {{citation.title}} 
+    <li> Published: {{citation.published}}
+    <li> Author: {{citation.author}}
+</ul>
 <hr>
 {% endfor %}
 
-<a href="/">Palaa etusivulle</a>
+<a href="/">Return</a>
