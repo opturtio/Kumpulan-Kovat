@@ -8,7 +8,13 @@ disable=missing-module-docstring,
         missing-function-docstring,
         missing-class-docstring,
         wrong-import-position,
-        unused-import
+        unused-import,
+        redefined-outer-name,
+        inconsistent-return-statements,
+        no-else-return,
+        cyclic-import
+
+ignored-classes=scoped_session
 
 [FORMAT]
 
