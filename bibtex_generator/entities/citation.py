@@ -1,4 +1,4 @@
-class Citation(object):
+class Citation:
     """
     This class takes arbitrary attributes and stores the assigned data in a dictionary.
     Every attribute is interpreted as a property
