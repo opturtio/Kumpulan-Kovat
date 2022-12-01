@@ -1,10 +1,15 @@
 from flask import render_template, request, redirect, abort, session
 from app import app
 from db import db
+from services.citation_service import citation_service
+
+
+def redirect_to_new_citation():
+    return redirect("/new_citation")
 
 
 @app.route("/", methods=["GET"])
-def root():  # nimen voi vaihtaa
+def root():
     return render_template("index.html")
 
 
@@ -26,13 +31,10 @@ def new_citation():
         title = request.form["title"]
         published = request.form["published"]
         author = request.form["author"]
+    
+        citation_service.create_citation(citation_name, title, published, author)
 
-        sql = """INSERT INTO citations (citation_name, title, published, author)
-                 VALUES (:citation_name, :title, :published, :author)"""
-        db.session.execute(sql, {"citation_name": citation_name,
-                           "title": title, "published": published, "author": author})
-        db.session.commit()
-        return redirect("/new_citation")
+        return redirect_to_new_citation()
 
 
 @app.route("/citations/<int:id>")
