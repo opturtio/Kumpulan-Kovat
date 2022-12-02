@@ -30,11 +30,11 @@ def new_citation():
     if request.method == "POST":
         citation_name = request.form["citation_name"]
         title = request.form["title"]
-        published = request.form["published"]
+        year = request.form["year"]
         author = request.form["author"]
 
         citation_service.create_citation(
-            citation_name, title, published, author)
+            citation_name, title, year, author)
 
         return redirect_to_new_citation()
 
