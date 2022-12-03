@@ -13,7 +13,9 @@ disable=missing-module-docstring,
         inconsistent-return-statements,
         no-else-return,
         cyclic-import,
-        W0622
+        W0622,
+        missing-timeout,
+        too-few-public-methods
 
 
 ignored-classes=scoped_session
@@ -33,7 +35,7 @@ ignore-imports=yes
 min-similarity-lines=4
 
 [BASIC]
-good-names=id,db
+good-names=id,db,AppLibrary
 argument-naming-style=snake_case
 attr-naming-style=snake_case
 class-naming-style=PascalCase
