@@ -4,3 +4,7 @@ __pycache__
 .DS_Store
 .vscode/
 *.swp
+log.html
+report.html
+output.xml
+selenium-screenshot-1.png
