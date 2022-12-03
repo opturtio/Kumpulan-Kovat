@@ -12,3 +12,7 @@ def lint(ctx):
 @task
 def format(ctx):
     ctx.run("autopep8 --in-place --recursive bibtex_generator")
+
+@task
+def robot(ctx):
+    ctx.run("robot bibtex_generator/tests")
