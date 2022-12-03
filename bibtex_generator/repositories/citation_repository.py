@@ -1,6 +1,6 @@
 from entities.citation import Citation
 from db import db
-
+from flask import request
 
 class CitationRepository:
     def __init__(self, db):
@@ -28,5 +28,14 @@ class CitationRepository:
     def get_citations(self):
         result = self._db.session.execute("""SELECT id, citation_name, title, year, author
                                              FROM citations""")
+        citations = result.fetchall()
+        return citations
+
+    def citation_search(self):
+        prequery = request.args["query"]
+        query = prequery.lower()
+        sql = "SELECT id, citation_name, type, title, year, author FROM citations " \
+              "WHERE lower(citation_name) LIKE :query or lower(type) LIKE :query"
+        result = db.session.execute(sql, {"query": "%" + query + "%"})
         citations = result.fetchall()
         return citations

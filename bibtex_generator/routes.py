@@ -40,6 +40,11 @@ def new_citation():
 
 
 @app.route("/citations/<int:id>")
-def recipe(id):
+def citation(id):
     citation = citation_service.get_citation(id)
     return render_template("citation.html", id=id, citation=citation)
+
+@app.route("/search")
+def result():
+    citations = citation_service.citation_search()
+    return render_template("citations.html", citations=citations)
