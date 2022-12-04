@@ -16,3 +16,11 @@ def format(ctx):
 @task
 def robot(ctx):
     ctx.run("robot bibtex_generator/tests")
+
+@task
+def coverage_report(ctx):
+    ctx.run("coverage erase")
+    ctx.run("coverage run --branch -m pytest bibtex_generator")
+    ctx.run("coverage run --branch -m robot bibtex_generator/tests")
+    ctx.run("coverage combine")
+    ctx.run("coverage html")
