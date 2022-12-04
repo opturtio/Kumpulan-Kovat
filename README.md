@@ -24,3 +24,8 @@ Pep8
 ```bash
 poetry run invoke format
 ```
+
+Coverage report
+```bash
+poetry run invoke coverage-report
+```
