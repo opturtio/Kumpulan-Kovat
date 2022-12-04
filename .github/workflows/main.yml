@@ -20,7 +20,17 @@ jobs:
         run: pip install poetry
       - name: Install dependencies
         run: poetry install
+      - name: Erase previous coverage
+        run: poetry run coverage erase
       - name: Pytest
-        run: poetry run pytest
+        run: poetry run coverage run --branch -m pytest
+#      - name: Robot
+#        run: bash run_robot_tests.sh
+      - name: Combine coverage reports
+        run: poetry run coverage combine
+      - name: Coverage report
+        run: poetry run coverage xml
+      - name: Coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
       - name: Lint
         run: poetry run invoke lint
