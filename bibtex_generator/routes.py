@@ -2,9 +2,9 @@ from flask import render_template, request, redirect, abort, session
 from app import app
 from db import db
 from entities import Citation
+from entities.bibtex_formatter import create_bibtex_citation_html
 from services.citation_service import CitationService, WrongAttributeTypeError
 from repositories.citation_repository import CitationRepository
-from entities.bibtex_formatter import create_bibtex_citation_html
 
 citation_service = CitationService(CitationRepository(db))
 

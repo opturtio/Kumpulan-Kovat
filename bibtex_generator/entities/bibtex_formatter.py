@@ -1,5 +1,5 @@
-from pylatexenc.latexencode import unicode_to_latex
 import html
+from pylatexenc.latexencode import unicode_to_latex
 
 def create_bibtex_citation(citation):
     bibtex_string = f"@{citation.type}{{{citation.citation_name}\n"
