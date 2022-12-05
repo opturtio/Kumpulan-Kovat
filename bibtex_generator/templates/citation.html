@@ -6,19 +6,12 @@
 <h3>Latex-form:</h3>
 <p>
     [{{citation.id}}] {{citation.author}}, <i> {{citation.title}} </i>, {{citation.year}}
+</p>
 <p>
     <h3>Bibtex-form:</h3>
-  @book{ {{citation.citation_name}},
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; author = "{{citation.author}}",
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; title = "{{citation.title}}",
-<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; year = "{{citation.year}}",
-<br>
-    }
-<br>
-<br>
+    {{bibtex_string|safe}}
+    <br>
+</p>
 <a href="/citations">Return</a>
 
 
