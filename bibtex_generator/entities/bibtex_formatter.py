@@ -3,7 +3,7 @@ from pylatexenc.latexencode import unicode_to_latex
 from entities.citation import Citation
 
 def create_bibtex_citation(citation):
-    if type(citation) is Citation:
+    if isinstance(citation, Citation):
         citation = citation.get_data()
     type_key = "type"
     name_key = "citation_name"
