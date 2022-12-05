@@ -35,7 +35,7 @@ jobs:
       - name: Erase previous coverage
         run: poetry run coverage erase
       - name: Create postgresql tables
-        run: psql -h localhost -f schema.sql
+        run: psql -h localhost -U test -f schema.sql
       - name: Start flask server for testing
         run: poetry run invoke start &
         env:
