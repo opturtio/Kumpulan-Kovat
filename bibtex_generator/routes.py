@@ -32,6 +32,7 @@ def new_citation():
         print(request.form["year"])
         citation_object = Citation(
             citation_name = request.form["citation_name"],
+            type = "book",
             title = request.form["title"],
             year = request.form["year"],
             author = request.form["author"]
