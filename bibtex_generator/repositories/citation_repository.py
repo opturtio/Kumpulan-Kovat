@@ -7,14 +7,14 @@ class CitationRepository:
         self._citation = Citation()
         self._db = db
 
-    def insert_citation(self, citation_name, title, year, author):
+    def insert_citation(self, citation_object):
         sql = """INSERT INTO citations (citation_name, title, year, author)
                  VALUES (:citation_name, :title, :year, :author)"""
         self._db.session.execute(sql, {
-            "citation_name": citation_name,
-            "title": title,
-            "year": year,
-            "author": author
+            "citation_name": citation_object.citation_name,
+            "title": citation_object.title,
+            "year": citation_object.year,
+            "author": citation_object.author
         }
         )
         self._db.session.commit()
