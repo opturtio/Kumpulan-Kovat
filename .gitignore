@@ -9,3 +9,4 @@ report.html
 output.xml
 selenium-screenshot-1.png
 .coverage*
+selenium-screenshot*
