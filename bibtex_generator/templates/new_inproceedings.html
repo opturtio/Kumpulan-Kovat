@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block title %}New citation{% endblock %}
+{% block content %}
+<br>
+<h2>New Inproceedings</h2>
+{% if error_message %}
+    <p class=error><strong>Error:</strong> {{ error_message }}
+{% endif %}
+<br>
+<form action="/new_inproceedings" method="POST">
+    <div class="form-group">
+        Citation name: <br><input type="text" name="citation_name" value = {{request.form.citation_name}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Author: <br><input type="text" name="author" value = {{request.form.author}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Title: <br><input type="text" name="title" value = {{request.form.title}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Book title: <br><input type="text" name="book_title" value = {{request.form.book_title}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Series: <br><input type="text" name="series" value = {{request.form.series}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Year: <br><input type="text" name="year" value = {{request.form.year}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Pages: <br><input type="text" name="pages" value = {{request.form.pages}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Publisher: <br><input type="text" name="publisher" value = {{request.form.publisher}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Address: <br><input type="text" name="address" value = {{request.form.address}}>
+        <p>
+    </div>
+    <button type="submit" class="btn btn-warning">Create New</button>
+</form>
+<br>
+<a href="/" class="btn btn-warning" role="button">Return</a>
+
+{% endblock %}
