@@ -2,13 +2,7 @@
 {% block title %}Citations{% endblock %}
 {% block content %}
 <h1> Current citation amount: {{ count }}</h1>
-<!-- Searchbar -->
-    <form action="/search" method="GET">
-        <p>Search: <input name="query" size="30" type="text"> <input type="submit" value="Search"> </p>
-        <p></p>
-    </form>
 <hr>
-
 {% for citation in citations %}
 Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a>
 <ul>

@@ -55,5 +55,7 @@ def citation(id):
 
 @app.route("/search")
 def result():
-    citations = citation_service.citation_search()
+    prequery = request.args["query"]
+    query = prequery.lower()
+    citations = citation_service.citation_search(query)
     return render_template("citations.html", citations=citations)
