@@ -11,6 +11,12 @@
 
 {% for citation in citations %}
 Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a>
+
+<!-- Remove citation -->
+<form action="/citations" method="POST">
+<button name="remove" type="sumbit" value="{{citation.id}}"> Remove citation </button>
+    </form>
+
 <ul>
     <li> Title: {{citation.title}} 
     <li> Year: {{citation.year}}
