@@ -8,9 +8,8 @@
 <div class="card shadow mb-4">
     <div class="card-body p-5">
         <h5 class="mb-4">Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a></h5>
-        <!-- Remove citation -->
         <form action="/citations" method="POST">
-        <button name="remove" type="sumbit" value="{{citation.id}}"> Remove citation </button>
+        <button name="remove" type="sumbit" value="{{citation.id}}"> Remove {{citation.citation_name}} citation </button>
             </form>
         <ul class="list-bullets">
             <li class="mb-3"> Title: {{citation.title}}</li>

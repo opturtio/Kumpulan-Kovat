@@ -37,7 +37,7 @@ Add Incorrect Citation
     Page Should Contain  Error
 
 Delete New Citation
-    create citation  robottest3 test3 2022  robot testaaja
+    create citation  robottest3  test3  2022  robot testaaja
     Go To Citations Page
     Click Button  Remove robottest3 citation
     Page Should Not Contain  Citation: robottest3
