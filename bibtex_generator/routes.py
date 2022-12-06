@@ -26,7 +26,6 @@ def citations():
 
     if request.method == "POST":
         id = request.form["remove"]
-        print(id)
         citation_service.remove_citation(id)
         citations = citation_service.get_citations()
         return render_template("citations.html", count=len(citations), citations=citations)

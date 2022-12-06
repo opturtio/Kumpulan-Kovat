@@ -50,3 +50,4 @@ class CitationService:
 
     def remove_citation(self, id):
         return self._citation_repository.remove_citation(id)
+
