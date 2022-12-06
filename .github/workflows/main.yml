@@ -41,7 +41,9 @@ jobs:
         env:
             DATABASE_URL: postgresql://test:test@localhost:${{ job.services.postgres.ports[5432] }}/test
       - name: Pytest
-        run: poetry run coverage run --branch -m pytest -m robot
+        run: poetry run coverage run --branch -m pytest 
+      - name: Robot
+        run: poetry run coverage run --branch -m robot bibtex_generator/tests
 #      - name: Robot
 #        run: bash run_robot_tests.sh
       - name: Combine coverage reports
