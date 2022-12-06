@@ -35,7 +35,7 @@ jobs:
       - name: Erase previous coverage
         run: poetry run coverage erase
       - name: Create postgresql tables
-        run: psql -h localhost -U test -f schema.sql
+        run: psql -h postgres://test:test@localhost:${{ job.services.postgres.ports[5432] }} -U test -f schema.sql
       - name: Start flask server for testing
         run: poetry run invoke start &
         env:
