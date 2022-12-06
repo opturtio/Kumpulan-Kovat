@@ -26,4 +26,12 @@ View New Citation
     Page Should Contain  author = "robot testaaja"
     Page Should Contain  title = "test2"
     Page Should Contain  year = "2022"
-    
+
+Add Incorrect Citation
+    Go To New Citation Page
+    Input Text  citation_name  robottest
+    Input Text  title  test
+    Input Text  year  test year
+    Input Text  author  robot testaaja
+    Click Button  Create new
+    Page Should Contain  Error

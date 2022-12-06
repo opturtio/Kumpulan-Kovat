@@ -2,14 +2,18 @@
 {% block title %}New citation{% endblock %}
 {% block content %}
 <h2>Create new citation</h2>
+{% if error_message %}
+    <p class=error><strong>Error:</strong> {{ error_message }}
+{% endif %}
 <form action="/new_citation" method="POST">
-Citation name: <br><input type="text" name="citation_name">
+
+Citation name: <br><input type="text" name="citation_name" value = {{request.form.citation_name}}>
 <p>
-Title: <br><input type="text" name="title">
+Title: <br><input type="text" name="title" value = {{request.form.title}}>
 <p>
-Year: <br><input type="text" name="year">
+Year: <br><input type="text" name="year" value = {{request.form.year}}>
 <p>
-Author: <br><input type="text" name="author">
+Author: <br><input type="text" name="author" value = {{request.form.author}}>
 <p>
 <input type="submit" value="Create new">
 </form>
