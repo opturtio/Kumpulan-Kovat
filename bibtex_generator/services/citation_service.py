@@ -45,5 +45,5 @@ class CitationService:
     def get_citations(self):
         return self._citation_repository.get_citations()
 
-    def citation_search(self):
-        return self._citation_repository.citation_search()
+    def citation_search(self, query):
+        return self._citation_repository.citation_search(query)

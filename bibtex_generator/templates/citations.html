@@ -1,25 +1,29 @@
 {% extends "layout.html" %}
 {% block title %}Citations{% endblock %}
 {% block content %}
-<h1> Current citation amount: {{ count }}</h1>
-<!-- Searchbar -->
-    <form action="/search" method="GET">
-        <p>Search: <input name="query" size="30" type="text"> <input type="submit" value="Search"> </p>
-        <p></p>
-    </form>
-<hr>
-
+<br>
+<h2> Current citation amount: {{ count }}</h2>
+<br>
 {% for citation in citations %}
-Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a>
-<ul>
-    <li> Title: {{citation.title}} 
-    <li> Year: {{citation.year}}
-    <li> Author: {{citation.author}}
-</ul>
-
-<hr>
-<hr>
+<div class="card shadow mb-4">
+    <div class="card-body p-5">
+        <h5 class="mb-4">Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a></h5>
+        <ul class="list-bullets">
+            <li class="mb-3"> Title: {{citation.title}}</li>
+            <li class="mb-3"> Year: {{citation.year}}</li>
+            <li class="mb-3"> Author: {{citation.author}}</li>
+        </ul>
+    </div>
+</div>
+<br>
 {% endfor %}
+<div class="input-group">
+    <a href="/citations" class="btn btn-warning" role="button">Top</a>
+    <div class="input-group-append">
+    </div>
+    <div class="input-group-append">
+        <a href="/" class="btn btn-warning" role="button">Return</a>
+    </div>
+</div>
 
-<a href="/">Return</a>
 {% endblock %}
