@@ -1,21 +1,32 @@
 {% extends "layout.html" %}
 {% block title %}New citation{% endblock %}
 {% block content %}
+<br>
 <h2>Create new citation</h2>
 {% if error_message %}
     <p class=error><strong>Error:</strong> {{ error_message }}
 {% endif %}
+<br>
 <form action="/new_citation" method="POST">
-
-Citation name: <br><input type="text" name="citation_name" value = {{request.form.citation_name}}>
-<p>
-Title: <br><input type="text" name="title" value = {{request.form.title}}>
-<p>
-Year: <br><input type="text" name="year" value = {{request.form.year}}>
-<p>
-Author: <br><input type="text" name="author" value = {{request.form.author}}>
-<p>
-<input type="submit" value="Create new">
+    <div class="form-group">
+        Citation name: <br><input type="text" name="citation_name" value = {{request.form.citation_name}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Title: <br><input type="text" name="title" value = {{request.form.title}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Year: <br><input type="text" name="year" value = {{request.form.year}}>
+        <p>
+    </div>
+    <div class="form-group">
+        Author: <br><input type="text" name="author" value = {{request.form.author}}>
+        <p>
+    </div>
+    <button type="submit" class="btn btn-warning">Create New</button>
 </form>
-<a href="/">Return</a>
+<br>
+<a href="/" class="btn btn-warning" role="button">Return</a>
+
 {% endblock %}
