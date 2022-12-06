@@ -18,10 +18,18 @@ def root():
     return render_template("index.html")
 
 
-@app.route("/citations", methods=["GET"])
+@app.route("/citations", methods=["GET", "POST"])
 def citations():
-    citations = citation_service.get_citations()
-    return render_template("citations.html", count=len(citations), citations=citations)
+    if request.method == "GET":
+        citations = citation_service.get_citations()
+        return render_template("citations.html", count=len(citations), citations=citations)
+
+    if request.method == "POST":
+        id = request.form["remove"]
+        print(id)
+        citation_service.remove_citation(id)
+        citations = citation_service.get_citations()
+        return render_template("citations.html", count=len(citations), citations=citations)
 
 
 @app.route("/new_citation", methods=["GET", "POST"])
@@ -47,13 +55,17 @@ def new_citation():
                 error_message = "Wrong types for: " + str(error)
             )
 
+
 @app.route("/citations/<int:id>")
 def citation(id):
     citation = citation_service.get_citation(id)
     bibtex_string = create_bibtex_citation_html(citation)
     return render_template("citation.html", id=id, citation=citation, bibtex_string=bibtex_string)
 
+
 @app.route("/search")
 def result():
-    citations = citation_service.citation_search()
+    prequery = request.args["query"]
+    query = prequery.lower()
+    citations = citation_service.citation_search(query)
     return render_template("citations.html", citations=citations)
