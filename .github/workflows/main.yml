@@ -34,12 +34,8 @@ jobs:
         run: poetry install
       - name: Erase previous coverage
         run: poetry run coverage erase
-      - name: Install PostgreSQL client
-        run: |
-          apt-get update
-          apt-get install --yes postgresql-client
       - name: Create postgresql tables
-        run: PGPASSWORD=test psql -h localhost -U test -d test -f schema.sql
+        run: PGPASSWORD=test psql -d postgres://test@localhost/test -f schema.sql
       - name: Start flask server for testing
         run: poetry run invoke start &
         env:
