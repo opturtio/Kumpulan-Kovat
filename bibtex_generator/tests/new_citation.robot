@@ -23,9 +23,9 @@ View New Citation
     Create Citation  robottest2  test2  2022  robot testaaja
     Go To Citations Page
     Click Link  robottest2
-    Page Should Contain  author = "robot testaaja"
-    Page Should Contain  title = "test2"
-    Page Should Contain  year = "2022"
+    Page Should Contain  author: "robot testaaja" 
+    Page Should Contain  title: "test2"
+    Page Should Contain  year: "2022"
 
 Add Incorrect Citation
     Go To New Citation Page
