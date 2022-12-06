@@ -18,7 +18,7 @@ jobs:
                 POSTGRES_PASSWORD: test
                 POSTGRES_DB: test
             ports:
-              - 5432/tcp
+              - 5432:5432
             
             options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
@@ -34,8 +34,8 @@ jobs:
         run: poetry install
       - name: Erase previous coverage
         run: poetry run coverage erase
-#      - name: Create postgresql tables
-#        run: PGPASSWORD=test psql -d postgresql://postgres@localhost/test -f schema.sql
+      - name: Create postgresql tables
+        run: PGPASSWORD=test psql -d postgresql://postgres@localhost/test -f schema.sql
       - name: Start flask server for testing
         run: poetry run invoke start &
         env:
