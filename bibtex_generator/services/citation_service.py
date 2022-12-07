@@ -24,11 +24,25 @@ class CitationService:
             "note" : str
         }
 
-    def create_citation(self, citation_object):
-        errors = self.validate_citation(citation_object)
-        if errors:
-            raise WrongAttributeTypeError(*errors)
-        self._citation_repository.insert_citation(citation_object)
+    def create_book_citation(self, citation_object):
+        self.validate_citation(citation_object)
+        self._citation_repository.insert_book_citation(citation_object)
+
+    def create_article_citation(self, citation_object):
+        self.validate_citation(citation_object)
+        self._citation_repository.insert_article_citation(citation_object)
+
+    def create_misc_citation(self, citation_object):
+        self.validate_citation(citation_object)
+        self._citation_repository.insert_misc_citation(citation_object)
+
+    def create_phdthesis_citation(self, citation_object):
+        self.validate_citation(citation_object)
+        self._citation_repository.insert_phdthesis_citation(citation_object)
+
+    def create_inproceedings_citation(self, citation_object):
+        self.validate_citation(citation_object)
+        self._citation_repository.insert_inproceedings_citation(citation_object)
 
     def validate_citation(self, citation):
         errors = []
@@ -37,7 +51,8 @@ class CitationService:
                 setattr(citation, key, self.attribute_types[key](value))
             except ValueError:
                 errors.append(key)
-        return errors
+        if errors:
+            raise WrongAttributeTypeError(*errors)
 
     def get_citation(self, id):
         return self._citation_repository.get_citation(id)
