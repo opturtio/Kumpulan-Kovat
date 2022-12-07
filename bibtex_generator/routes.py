@@ -13,7 +13,6 @@ citation_service = CitationService(CitationRepository(db))
 def redirect_to_new_citation():
     return redirect("/new_citation")
 
-
 @app.route("/", methods=["GET"])
 def root():
     return render_template("index.html")
@@ -23,30 +22,6 @@ def root():
 def citations():
     citations = citation_service.get_citations()
     return render_template("citations.html", count=len(citations), citations=citations)
-
-
-#@app.route("/new_citation", methods=["GET", "POST"])
-#def new_citation():
-#    if request.method == "GET":
-#        return render_template("new_citation.html", citation = False)
-#
-#    if request.method == "POST":
-#        print(request.form["year"])
-#        citation_object = Citation(
-#            citation_name = request.form["citation_name"],
-#            type = "book",
-#            title = request.form["title"],
-#            year = request.form["year"],
-#            author = request.form["author"]
-#        )
-#        try:
-#            citation_service.create_citation(citation_object)
-#            return redirect_to_new_citation()
-#        except WrongAttributeTypeError as error:
-#            return render_template(
-#                "new_citation.html",
-#                error_message = "Wrong types for: " + str(error)
-#            )
 
 @app.route("/new_book", methods=["GET", "POST"])
 def new_book():
@@ -64,16 +39,14 @@ def new_book():
             year = request.form["year"]
         )
 
-        print(citation_object, file=sys.stderr)
-        return redirect("/new_book")
-#        try:
-#            citation_service.create_citation(citation_object)
-#            return redirect_to_new_citation()
-#        except WrongAttributeTypeError as error:
-#            return render_template(
-#                "new_citation.html",
-#                error_message = "Wrong types for: " + str(error)
-#            )
+        try:
+            citation_service.create_book_citation(citation_object)
+            return redirect("/new_book")
+        except WrongAttributeTypeError as error:
+            return render_template(
+                "new_book.html",
+                error_message = "Wrong types for: " + str(error)
+            )
 
 @app.route("/new_article", methods=["GET", "POST"])
 def new_article():
@@ -92,16 +65,15 @@ def new_article():
             number = request.form["number"],
             pages = request.form["pages"]
         )
-        
-        return redirect("/new_article")
-#        try:
-#            citation_service.create_citation(citation_object)
-#            return redirect_to_new_citation()
-#        except WrongAttributeTypeError as error:
-#            return render_template(
-#                "new_citation.html",
-#                error_message = "Wrong types for: " + str(error)
-#            )
+
+        try:
+            citation_service.create_article_citation(citation_object)
+            return redirect("/new_article")
+        except WrongAttributeTypeError as error:
+            return render_template(
+                "new_article.html",
+                error_message = "Wrong types for: " + str(error)
+            )
 
 @app.route("/new_misc", methods=["GET", "POST"])
 def new_misc():
@@ -110,24 +82,23 @@ def new_misc():
 
     if request.method == "POST":
         citation_object = Citation(
-            type = "article",
+            type = "misc",
             citation_name = request.form["citation_name"],
             title = request.form["title"],
             author = request.form["author"],
-            how_published = request.form["how_published"],
+            howpublished = request.form["how_published"],
             year = request.form["year"],
             note = request.form["note"]
         )
-        
-        return redirect("/new_misc")
-#        try:
-#            citation_service.create_citation(citation_object)
-#            return redirect_to_new_citation()
-#        except WrongAttributeTypeError as error:
-#            return render_template(
-#                "new_citation.html",
-#                error_message = "Wrong types for: " + str(error)
-#            )
+
+        try:
+            citation_service.create_misc_citation(citation_object)
+            return redirect("/new_misc")
+        except WrongAttributeTypeError as error:
+            return render_template(
+                "new_misc.html",
+                error_message = "Wrong types for: " + str(error)
+            )
 
 @app.route("/new_phdthesis", methods=["GET", "POST"])
 def new_phdthesis():
@@ -136,7 +107,7 @@ def new_phdthesis():
 
     if request.method == "POST":
         citation_object = Citation(
-            type = "article",
+            type = "phdthesis",
             citation_name = request.form["citation_name"],
             author = request.form["author"],
             title = request.form["title"],
@@ -145,15 +116,15 @@ def new_phdthesis():
             year = request.form["year"],
             month = request.form["month"]
         )
-        
-        return redirect("/new_phdthesis")
-#        try:
-#            citation_service.create_citation(citation_object)
-#            return redirect_to_new_citation()
-#        except WrongAttributeTypeError as error:
-#            return render_template(
-#                "new_citation.html",
-#                error_message = "Wrong types for: " + str(error)
+
+        try:
+            citation_service.create_phdthesis_citation(citation_object)
+            return redirect("/new_phdthesis")
+        except WrongAttributeTypeError as error:
+            return render_template(
+                "new_phdthesis.html",
+                error_message = "Wrong types for: " + str(error)
+            )
 
 @app.route("/new_inproceedings", methods=["GET", "POST"])
 def new_inproceedings():
@@ -162,26 +133,26 @@ def new_inproceedings():
 
     if request.method == "POST":
         citation_object = Citation(
-            type = "article",
+            type = "inproceedings",
             citation_name = request.form["citation_name"],
             author = request.form["author"],
             title = request.form["title"],
-            book_title = request.form["book_title"],
+            booktitle = request.form["book_title"],
             series = request.form["series"],
             year = request.form["year"],
             pages = request.form["pages"],
             publisher = request.form["publisher"],
             address = request.form["address"]
         )
-        
-        return redirect("/new_inproceedings")
-#        try:
-#            citation_service.create_citation(citation_object)
-#            return redirect_to_new_citation()
-#        except WrongAttributeTypeError as error:
-#            return render_template(
-#                "new_citation.html",
-#                error_message = "Wrong types for: " + str(error)
+
+        try:
+            citation_service.create_inproceedings_citation(citation_object)
+            return redirect("/new_inproceedings")
+        except WrongAttributeTypeError as error:
+            return render_template(
+                "new_inproceedings.html",
+                error_message = "Wrong types for: " + str(error)
+            )
 
 @app.route("/citations/<int:id>")
 def citation(id):
