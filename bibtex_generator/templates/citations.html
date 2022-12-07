@@ -13,6 +13,9 @@
             <li class="mb-3"> Year: {{citation.year}}</li>
             <li class="mb-3"> Author: {{citation.author}}</li>
         </ul>
+        <form action="/citations" method="POST">
+            <button class="btn btn-warning" name="remove" type="sumbit" value="{{citation.id}}"> Remove {{citation.citation_name}} citation </button>
+        </form>
     </div>
 </div>
 <br>
