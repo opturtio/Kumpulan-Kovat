@@ -23,11 +23,11 @@ class TestBibtexFromatter(unittest.TestCase):
         "&emsp;&emsp;year: &quot;2022&quot;<br>"
         "}"
         )
-    
+
     def test_create_bibtex_citation_works(self):
         bibtex_string = create_bibtex_citation(self.citation_object)
         self.assertEqual(bibtex_string, self.correct_string)
-    
+
     def test_create_bibtex_citation_html_works(self):
         bibtex_string_html = create_bibtex_citation_html(self.citation_object)
         self.assertEqual(bibtex_string_html, self.correct_string_html)
