@@ -184,7 +184,7 @@ class CitationRepository:
     def citation_search(self, query):
         sql = "SELECT * FROM citations " \
               "WHERE lower(citation_name) LIKE :query or lower(type) LIKE :query"
-        result = db.session.execute(sql, {"query": "%" + query + "%"})
+        result = self._db.session.execute(sql, {"query": "%" + query + "%"})
         citations = result.fetchall()
         return citations
 
