@@ -4,12 +4,14 @@ class AppLibrary:
     def __init__(self):
         self._base_url = "http://localhost:5000"
 
-    def create_citation(self, citation_name, title, year, author):
+    def create_book(self, citation_name, author, title, publisher, address, year):
         data = {
             "citation_name": citation_name,
+            "author": author,
             "title": title,
+            "publisher": publisher,
+            "address": address,
             "year": year,
-            "author": author
         }
 
-        requests.post(f"{self._base_url}/new_citation", data=data)
+        requests.post(f"{self._base_url}/new_book", data=data)

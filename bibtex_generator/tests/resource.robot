@@ -7,7 +7,7 @@ ${SERVER}  localhost:5000
 ${BROWSER}  headlesschrome
 ${DELAY}  0 seconds
 ${HOME URL}  http://${SERVER}
-${NEW CITATION URL}  http://${SERVER}/new_citation
+${NEW BOOK URL}  http://${SERVER}/new_book
 ${CITATIONS URL}  http://${SERVER}/citations
 
 *** Keywords ***
@@ -25,8 +25,8 @@ New Citation Page Should Be Open
 Go To Main Page
     Go To  ${HOME URL}
 
-Go To New Citation Page
-    Go To  ${NEW CITATION URL}
+Go To New Book Page
+    Go To  ${NEW BOOK URL}
 
 Go To Citations Page
     Go To  ${CITATIONS URL}
