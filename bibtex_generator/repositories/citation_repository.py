@@ -1,5 +1,5 @@
 from entities.citation import Citation
-from db import db
+#from db import db
 
 
 class CitationRepository:
