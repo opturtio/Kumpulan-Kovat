@@ -8,8 +8,23 @@ class CitationRepository:
         self._db = db
 
     def insert_book_citation(self, citation_object):
-        sql = """INSERT INTO citations (citation_name, type, author, title, publisher, address, year)
-                 VALUES (:citation_name, :type, :author, :title, :publisher, :address, :year)"""
+        sql = """INSERT INTO citations (
+                    citation_name,
+                    type,
+                    author,
+                    title,
+                    publisher,
+                    address,
+                    year
+                ) VALUES (
+                    :citation_name,
+                    :type,
+                    :author,
+                    :title,
+                    :publisher,
+                    :address,
+                    :year
+                )"""
         self._db.session.execute(sql, {
             "citation_name": citation_object.citation_name,
             "type": citation_object.type,
@@ -22,8 +37,27 @@ class CitationRepository:
         self._db.session.commit()
 
     def insert_article_citation(self, citation_object):
-        sql = """INSERT INTO citations (citation_name, type, author, title, journal, year, volume, number, pages)
-                 VALUES (:citation_name, :type, :author, :title, :journal, :year, :volume, :number, :pages)"""
+        sql = """INSERT INTO citations (
+                    citation_name,
+                    type,
+                    author,
+                    title,
+                    journal,
+                    year,
+                    volume,
+                    number,
+                    pages
+                ) VALUES (
+                    :citation_name,
+                    :type,
+                    :author,
+                    :title,
+                    :journal,
+                    :year,
+                    :volume,
+                    :number,
+                    :pages
+                )"""
         self._db.session.execute(sql, {
             "citation_name": citation_object.citation_name,
             "type": citation_object.type,
@@ -38,8 +72,23 @@ class CitationRepository:
         self._db.session.commit()
 
     def insert_misc_citation(self, citation_object):
-        sql = """INSERT INTO citations (citation_name, type, author, title, howpublished, year, note)
-                 VALUES (:citation_name, :type, :author, :title, :howpublished, :year, :note)"""
+        sql = """INSERT INTO citations (
+                    citation_name,
+                    type,
+                    author,
+                    title,
+                    howpublished,
+                    year,
+                    note
+                ) VALUES (
+                    :citation_name,
+                    :type,
+                    :author,
+                    :title,
+                    :howpublished,
+                    :year,
+                    :note
+                )"""
         self._db.session.execute(sql, {
             "citation_name": citation_object.citation_name,
             "type": citation_object.type,
@@ -52,8 +101,25 @@ class CitationRepository:
         self._db.session.commit()
 
     def insert_phdthesis_citation(self, citation_object):
-        sql = """INSERT INTO citations (citation_name, type, author, title, school, address, year, month)
-                 VALUES (:citation_name, :type, :author, :title, :school, :address, :year, :month)"""
+        sql = """INSERT INTO citations (
+                    citation_name,
+                    type,
+                    author,
+                    title,
+                    school,
+                    address,
+                    year,
+                    month
+                ) VALUES (
+                    :citation_name,
+                    :type,
+                    :author,
+                    :title,
+                    :school,
+                    :address,
+                    :year,
+                    :month
+                )"""
         self._db.session.execute(sql, {
             "citation_name": citation_object.citation_name,
             "type": citation_object.type,
@@ -67,8 +133,29 @@ class CitationRepository:
         self._db.session.commit()
 
     def insert_inproceedings_citation(self, citation_object):
-        sql = """INSERT INTO citations (citation_name, type, author, title, booktitle, series, year, pages, publisher, address)
-                 VALUES (:citation_name, :type, :author, :title, :booktitle, :series, :year, :pages, :publisher, :address)"""
+        sql = """INSERT INTO citations (
+                    citation_name,
+                    type,
+                    author,
+                    title,
+                    booktitle,
+                    series,
+                    year,
+                    pages,
+                    publisher,
+                    address
+                ) VALUES (
+                    :citation_name,
+                    :type,
+                    :author,
+                    :title,
+                    :booktitle,
+                    :series,
+                    :year,
+                    :pages,
+                    :publisher,
+                    :address
+                )"""
         self._db.session.execute(sql, {
             "citation_name": citation_object.citation_name,
             "type": citation_object.type,
