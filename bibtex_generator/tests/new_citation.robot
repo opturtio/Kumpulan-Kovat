@@ -23,8 +23,17 @@ Add New Book Citation
     Page Should Contain  Citation: robottest book
 
 View New Citation
-    Create Book  robottest2  robot testaaja  test2  robot testaaja  testi osoite  2022
+    Go To New Book Page
+    Input Text  citation_name  robottest2
+    Input Text  author  robot testaaja
+    Input Text  title  test2
+    Input Text  publisher  robot testaaja
+    Input Text  address  testi osoite
+    Input Text  year  2022
+    Click Button  Create New
     Go To Citations Page
+    Run Keyword And Ignore Error  Scroll Element Into View  link:robottest2
+    Wait Until Element Is Visible  link:robottest2
     Click Link  robottest2
     Page Should Contain  author: "robot testaaja" 
     Page Should Contain  title: "test2"
