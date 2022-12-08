@@ -6,8 +6,10 @@
 [Retrospektiivi 1](/documents/RETRO.md)
 ## Definition of Done
 
-The acceptance criteria of the user story have been implemented.  
-All code written follows the pylint-guidelines of the project.
+The acceptance criteria of the user story have been implemented.\
+All code written follows the pylint-guidelines of the project.\
+Unittest coverage is atleast 70%.\
+There is fair amount of e2e tests.
 
 ## Invoke komennot
 
