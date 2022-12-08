@@ -18,6 +18,7 @@ class TestCitationService(unittest.TestCase):
             )
         self.article = Citation(
             citation_name = "testi",
+            type = "article",
             author = "testaaja",
             title = "testi kirja",
             journal = "testi",
@@ -28,6 +29,7 @@ class TestCitationService(unittest.TestCase):
             )
         self.inproceedings = Citation(
             citation_name = "testi",
+            type = "inproceedings",
             author = "testaaja",
             title = "testi kirja",
             booktitle = "testi otsikko",
@@ -39,6 +41,7 @@ class TestCitationService(unittest.TestCase):
             )
         self.misc = Citation(
             citation_name = "testi",
+            type = "misc",
             title = "testi kirja",
             author = "testaaja",
             howpublished = r"\url{https://www.test.com}",
@@ -47,6 +50,7 @@ class TestCitationService(unittest.TestCase):
             )
         self.phdthesis = Citation(
             citation_name = "testi",
+            type = "phdthesis",
             author = "testaaja",
             title = "testi kirja",
             school = "testi koulu",
@@ -54,24 +58,24 @@ class TestCitationService(unittest.TestCase):
             year = "2022",
             month = "joulukuu"
             )
-        
+
 
     def test_can_add_book_citation(self):
         self.citation_service.create_book_citation(self.book)
         self.citation_repository_mock.insert_book_citation.assert_called_with(self.book)
-    
+
     def test_can_add_article_citation(self):
         self.citation_service.create_article_citation(self.article)
         self.citation_repository_mock.insert_article_citation.assert_called_with(self.article)
-    
+
     def test_can_add_inproceedings_citation(self):
         self.citation_service.create_inproceedings_citation(self.inproceedings)
         self.citation_repository_mock.insert_inproceedings_citation.assert_called_with(self.inproceedings)
-    
+
     def test_can_add_misc_citation(self):
         self.citation_service.create_misc_citation(self.misc)
         self.citation_repository_mock.insert_misc_citation.assert_called_with(self.misc)
-    
+
     def test_can_add_phdthesis_citation(self):
         self.citation_service.create_phdthesis_citation(self.phdthesis)
         self.citation_repository_mock.insert_phdthesis_citation.assert_called_with(self.phdthesis)
@@ -112,7 +116,7 @@ class TestCitationService(unittest.TestCase):
         print(citations)
         self.assertEqual(len(citations), 3)
         self.assertEqual(citations, [book_values, book_values, book_values])
-    
+
     def test_citation_validation_does_not_raise_a_typeerror_when_correct_attribute_type_is_used(self):
         try:
             self.citation_service.validate_citation(self.book)
@@ -122,7 +126,7 @@ class TestCitationService(unittest.TestCase):
     def test_validate_citation_raises_typeerror_when_wrong_attribute_type_is_used(self):
         self.book.year = "test"
         self.assertRaises(WrongAttributeTypeError, self.citation_service.validate_citation, self.book)
-    
+
     def test_the_raised_typerror_includes_info_about_which_attribute_fails(self):
         self.book.year = "test"
         try:
@@ -139,20 +143,20 @@ class TestCitationService(unittest.TestCase):
 
     def test_create_book_citation_raises_typeerror_when_wrong_attribute_type_is_used(self):
         setattr(self.book, "year", "test")
-        self.assertRaises(WrongAttributeTypeError, self.citation_service.create_book_citation, self.book)   
+        self.assertRaises(WrongAttributeTypeError, self.citation_service.create_book_citation, self.book)
 
     def test_create_article_citation_raises_typeerror_when_wrong_attribute_type_is_used(self):
         self.article.year = "test"
         self.assertRaises(WrongAttributeTypeError, self.citation_service.create_article_citation, self.article)
-    
+
     def test_create_inproceedings_citation_raises_typeerror_when_wrong_attribute_type_is_used(self):
         self.inproceedings.year = "test"
         self.assertRaises(WrongAttributeTypeError, self.citation_service.create_inproceedings_citation, self.inproceedings)   
 
     def test_create_misc_citation_raises_typeerror_when_wrong_attribute_type_is_used(self):
         self.misc.year = "test"
-        self.assertRaises(WrongAttributeTypeError, self.citation_service.create_misc_citation, self.misc)   
+        self.assertRaises(WrongAttributeTypeError, self.citation_service.create_misc_citation, self.misc)
 
     def test_create_phdthesis_citation_raises_typeerror_when_wrong_attribute_type_is_used(self):
         self.phdthesis.year = "test"
-        self.assertRaises(WrongAttributeTypeError, self.citation_service.create_phdthesis_citation, self.phdthesis)   
+        self.assertRaises(WrongAttributeTypeError, self.citation_service.create_phdthesis_citation, self.phdthesis)
