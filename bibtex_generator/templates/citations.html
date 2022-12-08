@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block title %}Citations{% endblock %}
 {% block content %}
-<br>
+<br href="#top">
 <h2> Current citation amount: {{ count }}</h2>
 <br>
 {% for citation in citations %}
@@ -24,7 +24,7 @@
 <br>
 {% endfor %}
 <div class="input-group">
-    <a href="/citations" class="btn btn-warning" role="button">Top</a>
+    <a href="#top" class="btn btn-warning" role="button">Top</a>
     <div class="input-group-append">
     </div>
     <div class="input-group-append">
