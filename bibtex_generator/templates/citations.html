@@ -11,7 +11,7 @@
         <ul class="list-bullets">
             {% for key in citation.keys() %}
             {% if citation[key] and key != "id" and key != "citation_name" %}
-            <li class="mb-3"> {{key}}: {{citation[key]}}</li>
+            <li class="mb-3"> <span style="text-transform:capitalize">{{key}}</span>: {{citation[key]}}</li>
             {% endif %}
             {% endfor %}
         </ul>
