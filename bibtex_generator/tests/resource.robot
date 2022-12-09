@@ -5,7 +5,7 @@ Library  ../AppLibrary.py
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  headlesschrome
-${DELAY}  0.1 seconds
+${DELAY}  0 seconds
 ${HOME URL}  http://${SERVER}
 ${NEW BOOK URL}  http://${SERVER}/new_book
 ${CITATIONS URL}  http://${SERVER}/citations
