@@ -9,12 +9,15 @@
     <div class="card-body p-5">
         <h5 class="mb-4">Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a></h5>
         <ul class="list-bullets">
-            <li class="mb-3"> Title: {{citation.title}}</li>
-            <li class="mb-3"> Year: {{citation.year}}</li>
-            <li class="mb-3"> Author: {{citation.author}}</li>
+            {% for key in citation.keys() %}
+            {% if citation[key] and key != "id" and key != "citation_name" %}
+            <li class="mb-3"> <span style="text-transform:capitalize">{{key}}</span>: {{citation[key]}}</li>
+            {% endif %}
+            {% endfor %}
         </ul>
         <form action="/citations" method="POST">
-            <button class="btn btn-warning" name="remove" type="sumbit" value="{{citation.id}}"> Remove {{citation.citation_name}} citation </button>
+            <button class="btn btn-warning" name="remove" type="sumbit" value="{{citation.id}}"> Remove
+                {{citation.citation_name}} citation </button>
         </form>
     </div>
 </div>
