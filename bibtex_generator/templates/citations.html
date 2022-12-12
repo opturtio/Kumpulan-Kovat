@@ -5,7 +5,9 @@
 <div class="d-flex aligns-items-center justify-content-center">
     <h2> Current citation amount: {{ count }}</h2>
 </div>
-<br>
+<div class="d-flex aligns-items-center justify-content-center">
+                <a class="btn btn-warning my-1 me-1" href="/download">Download selected citations</a>
+            </div>
 
         <div class="mx-auto w-25 p-3 d-none d-lg-block">
             {% for citation in citations %}
