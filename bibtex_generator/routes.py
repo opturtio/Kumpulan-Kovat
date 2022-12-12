@@ -1,4 +1,5 @@
 import sys
+import requests
 from flask import render_template, request, redirect, abort, session
 from app import app
 from db import db
@@ -38,7 +39,69 @@ def doi():
         return render_template("doi.html", citation = False)
 
     if request.method == "POST":
-        pass
+        doi = request.form["doi"]
+        url = "https://api.crossref.org/works/" + doi
+
+        try:
+            response = requests.get(url)
+        except requests.exceptions.RequestException:
+            return render_template(
+                "doi.html",
+                error_message = "Connection to CrossRef database failed"
+            )
+        if response.status_code == 404:
+            return render_template(
+                "doi.html",
+                error_message = "Invalid DOI code"
+            )
+
+        data = response.json()["message"]
+
+        # These fields exist in both articles and books
+        if "author" in data.keys():
+            citation_author = data["author"][0]["given"] + " " + data["author"][0]["family"]
+        else:
+            citation_author = data["editor"][0]["given"] + " " + data["editor"][0]["family"]
+
+        if "published-print" in data.keys():
+            citation_year = data["published-print"]["date-parts"][0][0]
+        else:
+            citation_year = data["published-online"]["date-parts"][0][0]
+
+        citation_title = data["title"][0]
+
+        if data["type"] == "journal-article":
+            citation_object = Citation(
+                type = "article",
+                citation_name = request.form["citation_name"],
+                author = citation_author,
+                title = citation_title,
+                journal = data["short-container-title"][0],
+                year = citation_year,
+                volume = data["volume"],
+                number = data["issue"],
+                pages = data["page"]
+            )
+            citation_service.create_article_citation(citation_object)
+            return redirect("/doi")
+
+        if data["type"] == "book":
+            citation_object = Citation(
+                type = "book",
+                citation_name = request.form["citation_name"],
+                author = citation_author,
+                title = citation_title,
+                publisher = data["publisher"],
+                address = data["publisher-location"],
+                year = citation_year
+            )
+            citation_service.create_book_citation(citation_object)
+            return redirect("/doi")
+
+        return render_template(
+            "doi.html",
+            error_message = "Citation must be an Article or a Book"
+        )
 
 
 @app.route("/new_book", methods=["GET", "POST"])
