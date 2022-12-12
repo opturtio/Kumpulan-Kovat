@@ -33,7 +33,7 @@ View New Citation
     Click Button  Create New
     Go To Citations Page
     Wait Until Page Contains  Current citation amount:
-    Sleep  0.1s
+    Sleep  1s
     Run Keyword And Ignore Error  Scroll Element Into View  link:robottest2
     Wait Until Element Is Visible  link:robottest2
     Click Link  robottest2
