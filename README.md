@@ -32,3 +32,4 @@ Coverage report
 ```bash
 poetry run invoke coverage-report
 ```
+
