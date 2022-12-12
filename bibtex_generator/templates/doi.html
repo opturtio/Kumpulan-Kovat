@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}DOI{% endblock %}
+{% block content %}
+<br>
+<h2>Add new Article or Book via DOI</h2>
+{% if error_message %}
+    <p class=error><strong>Error:</strong> {{ error_message }}
+{% endif %}
+{% if success_message %}
+    <p class=success>Successfully added new {{success_message}} citation
+{% endif %}
+<br>
+<form action="/doi" method="POST">
+    <div class="form-group">
+        Citation name: <br><input type="text" name="citation_name" value = {{request.form.citation_name}}>
+        <p>
+    </div>
+    <div class="form-group">
+        DOI: <br><input type="text" name="doi" value = {{request.form.doi}}>
+        <p>
+    </div>
+    <button type="submit" class="btn btn-warning">Create New</button>
+</form>
+<br>
+<a href="/" class="btn btn-warning" role="button">Return</a>
+
+
+
+
+{% endblock %}

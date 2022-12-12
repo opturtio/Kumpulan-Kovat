@@ -2,34 +2,60 @@
 {% block title %}Citations{% endblock %}
 {% block content %}
 <br href="#top">
-<h2> Current citation amount: {{ count }}</h2>
-<br>
-{% for citation in citations %}
-<div class="card shadow mb-4">
-    <div class="card-body p-5">
-        <h5 class="mb-4">Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a></h5>
-        <ul class="list-bullets">
-            {% for key in citation.keys() %}
-            {% if citation[key] and key != "id" and key != "citation_name" %}
-            <li class="mb-3"> <span style="text-transform:capitalize">{{key}}</span>: {{citation[key]}}</li>
-            {% endif %}
+<div class="d-flex aligns-items-center justify-content-center">
+    <h2> Current citation amount: {{ count }}</h2>
+</div>
+<div class="d-flex aligns-items-center justify-content-center">
+                <a class="btn btn-warning my-1 me-1" href="/download">Download selected citations</a>
+            </div>
+
+        <div class="mx-auto w-25 p-3 d-none d-lg-block">
+            {% for citation in citations %}
+                <div class="card shadow mb-4">
+                    <div class="card-body p-5">
+                        <h5 class="mb-4">Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a></h5>
+                            <ul class="list-bullets">
+                                {% for key in citation.keys() %}
+                                    {% if citation[key] and key != "id" and key != "citation_name" %}
+                                        <li class="mb-3"> <span style="text-transform:capitalize">{{key}}</span>: {{citation[key]}}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        <br>
+
+                        <div class="container d-flex aligns-items-center justify-content-center">
+                            <div class="row">
+
+                                <div class="col-4">
+                                    <form action="/citations" method="POST">
+                                        <button class="btn btn-warning col-15 mx-2" name="remove" type="sumbit" value="{{citation.id}}"> Remove </button>
+                                    </form>
+                                </div>
+
+                                <div class="col-4"></div>
+
+                                <div class="col-4">
+                                    <form action="/citations" method="POST">
+                                        <button class="btn btn-warning col-15 mx-2" name="edit" type="sumbit" value="{{citation.id}}"> Edit </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            <br>
             {% endfor %}
-        </ul>
-        <form action="/citations" method="POST">
-            <button class="btn btn-warning" name="remove" type="sumbit" value="{{citation.id}}"> Remove
-                {{citation.citation_name}} citation </button>
-        </form>
-    </div>
-</div>
-<br>
-{% endfor %}
-<div class="input-group">
-    <a href="#top" class="btn btn-warning" role="button">Top</a>
-    <div class="input-group-append">
-    </div>
-    <div class="input-group-append">
-        <a href="/" class="btn btn-warning" role="button">Return</a>
-    </div>
-</div>
+
+            <div class="d-flex aligns-items-center justify-content-center">
+
+                            <a href="#top" class="btn btn-warning col-md-4 mx-xl-5" role="button">Top</a>
+
+                            <a href="/" class="btn btn-warning col-md-4 mx-xl-5" role="button">Return</a>
+
+            </div>
+        </div>
+
 
 {% endblock %}

@@ -15,7 +15,8 @@ disable=missing-module-docstring,
         cyclic-import,
         W0622,
         missing-timeout,
-        too-few-public-methods
+        too-few-public-methods,
+        W0703
 
 
 ignored-classes=scoped_session
