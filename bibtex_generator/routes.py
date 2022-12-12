@@ -7,14 +7,16 @@ from db import db
 from entities import Citation
 from entities.bibtex_formatter import create_bibtex_citation_html
 from services.citation_service import CitationService, WrongAttributeTypeError
+from services.bibtex_service import BibtexService
 from repositories.citation_repository import CitationRepository
 
 
 citation_service = CitationService(CitationRepository(db))
-
+bibtex_service = BibtexService(citation_service)
 
 @app.route("/download")
 def download_file():
+    bibtex_service.generate_bibtex_file(citation_service.get_citations())
     cwd = os.getcwd()
     file_path = os.path.join(cwd, "references.bib")
     try:
