@@ -5,7 +5,7 @@ Library  ../AppLibrary.py
 *** Variables ***
 ${SERVER}  localhost:5000
 ${BROWSER}  headlesschrome
-${DELAY}  0 seconds
+${DELAY}  0.1 seconds
 ${HOME URL}  http://${SERVER}
 ${NEW BOOK URL}  http://${SERVER}/new_book
 ${CITATIONS URL}  http://${SERVER}/citations
@@ -13,7 +13,8 @@ ${CITATIONS URL}  http://${SERVER}/citations
 *** Keywords ***
 Open And Configure Browser
     Open Browser  browser=${BROWSER}
-    Maximize Browser Window
+    # Maximize Browser Window
+    Set Window Size  ${1920}  ${1080}
     Set Selenium Speed  ${DELAY}
 
 Main Page Should Be Open
