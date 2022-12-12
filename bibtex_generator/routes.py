@@ -83,7 +83,10 @@ def doi():
                 pages = data["page"]
             )
             citation_service.create_article_citation(citation_object)
-            return redirect("/doi")
+            return render_template(
+                "doi.html",
+                success_message = "Article"
+            )
 
         if data["type"] == "book":
             citation_object = Citation(
@@ -96,7 +99,10 @@ def doi():
                 year = citation_year
             )
             citation_service.create_book_citation(citation_object)
-            return redirect("/doi")
+            return render_template(
+                "doi.html",
+                success_message = "Article"
+            )
 
         return render_template(
             "doi.html",
