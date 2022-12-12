@@ -1,6 +1,6 @@
 import sys
-import requests
 import os
+import requests
 from flask import render_template, request, redirect, abort, session, send_file
 from app import app
 from db import db
@@ -19,8 +19,8 @@ def download_file():
     file_path = os.path.join(cwd, "references.bib")
     try:
         return send_file(file_path, "references.bib", as_attachment=True)
-    except Exception as e:
-        return str(e)
+    except Exception as error:
+        return str(error)
 
 
 def redirect_to_new_citation():
