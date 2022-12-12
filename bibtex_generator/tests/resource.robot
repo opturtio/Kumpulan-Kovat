@@ -9,6 +9,7 @@ ${DELAY}  0.1 seconds
 ${HOME URL}  http://${SERVER}
 ${NEW BOOK URL}  http://${SERVER}/new_book
 ${CITATIONS URL}  http://${SERVER}/citations
+${DOI URL}  http://${SERVER}/doi
 
 *** Keywords ***
 Open And Configure Browser
@@ -23,6 +24,9 @@ Main Page Should Be Open
 New Citation Page Should Be Open
     Title Should Be  New citation
 
+DOI Page Should Be Open
+    Title Should Be  DOI
+
 Go To Main Page
     Go To  ${HOME URL}
 
@@ -31,3 +35,6 @@ Go To New Book Page
 
 Go To Citations Page
     Go To  ${CITATIONS URL}
+
+Go To DOI Page
+    Go To  ${DOI URL}

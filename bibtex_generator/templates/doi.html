@@ -6,6 +6,9 @@
 {% if error_message %}
     <p class=error><strong>Error:</strong> {{ error_message }}
 {% endif %}
+{% if success_message %}
+    <p class=success>Successfully added new {{success_message}} citation
+{% endif %}
 <br>
 <form action="/doi" method="POST">
     <div class="form-group">
