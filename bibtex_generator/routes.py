@@ -13,6 +13,7 @@ citation_service = CitationService(CitationRepository(db))
 def redirect_to_new_citation():
     return redirect("/new_citation")
 
+
 @app.route("/", methods=["GET"])
 def root():
     return render_template("index.html")
@@ -29,6 +30,16 @@ def citations():
         citation_service.remove_citation(id)
         citations = citation_service.get_citations()
         return render_template("citations.html", count=len(citations), citations=citations)
+
+
+@app.route("/doi", methods=["GET", "POST"])
+def doi():
+    if request.method == "GET":
+        return render_template("doi.html", citation = False)
+
+    if request.method == "POST":
+        pass
+
 
 @app.route("/new_book", methods=["GET", "POST"])
 def new_book():
@@ -54,6 +65,7 @@ def new_book():
                 "new_book.html",
                 error_message = "Wrong types for: " + str(error)
             )
+
 
 @app.route("/new_article", methods=["GET", "POST"])
 def new_article():
@@ -82,6 +94,7 @@ def new_article():
                 error_message = "Wrong types for: " + str(error)
             )
 
+
 @app.route("/new_misc", methods=["GET", "POST"])
 def new_misc():
     if request.method == "GET":
@@ -106,6 +119,7 @@ def new_misc():
                 "new_misc.html",
                 error_message = "Wrong types for: " + str(error)
             )
+
 
 @app.route("/new_phdthesis", methods=["GET", "POST"])
 def new_phdthesis():
@@ -132,6 +146,7 @@ def new_phdthesis():
                 "new_phdthesis.html",
                 error_message = "Wrong types for: " + str(error)
             )
+
 
 @app.route("/new_inproceedings", methods=["GET", "POST"])
 def new_inproceedings():
@@ -175,3 +190,12 @@ def result():
     query = prequery.lower()
     citations = citation_service.citation_search(query)
     return render_template("citations.html", citations=citations)
+
+
+@app.route("/upload", methods=["GET", "POST"])
+def upload():
+    if request.method == "GET":
+        return render_template("upload.html", citation = False)
+
+    if request.method == "POST":
+        pass
