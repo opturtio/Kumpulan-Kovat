@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block title %} {{citation.citation_name}} {% endblock %}
+{% block content %}
+
+<p>Edit</p>
+<form action={{ request.path }} method="POST" id="edit_form">
+    {% for key, value in data.items() %}
+        {% if value and key != "id" and key != "type" %}
+            {{ key }}:
+            <br>
+            <input type="text" name={{ key }} value="{{ value }}">
+            <br>
+        {% elif not value %}
+            <input type="hidden" name={{ key }} value="">
+        {% endif %}
+    {% endfor %}
+    <a href="javascript:{}" class="btn btn-warning" onclick="document.getElementById('edit_form').submit(); return false;">
+        Edit values
+    </a>
+</form>
+
+{% endblock %}

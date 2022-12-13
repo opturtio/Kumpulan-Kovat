@@ -42,7 +42,7 @@
                                 <div class="col-4"></div>
 
                                 <div class="col-4">
-                                    <form action="/citations" method="POST">
+                                    <form action={{"/edit/" + citation.id|string }} method="GET">
                                         <button class="btn btn-warning col-15 mx-2" name="edit" type="sumbit" value="{{citation.id}}"> Edit </button>
                                     </form>
                                 </div>
