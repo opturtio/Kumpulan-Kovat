@@ -19,8 +19,8 @@ bibtex_service = BibtexService(citation_service)
 def download_file():
     ids = request.form.getlist("selected")
     int_ids = []
-    for x in ids:
-        int_ids.append(int(x))
+    for id in ids:
+        int_ids.append(int(id))
     bibtex_service.generate_bibtex_file(int_ids)
     cwd = os.getcwd()
     file_path = os.path.join(cwd, "references.bib")
