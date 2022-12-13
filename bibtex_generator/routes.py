@@ -268,3 +268,13 @@ def upload():
 
     if request.method == "POST":
         pass
+
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
+def edit(id):
+    if request.method == "GET":
+        data = citation_service.get_citation(id)
+        return render_template("edit.html", citation = False, data=data._asdict())
+
+    if request.method == "POST":
+        citation_service.edit_citation(id, request.form)
+        return redirect(f"/citations/{id}")

@@ -192,3 +192,49 @@ class CitationRepository:
         sql = "DELETE FROM citations WHERE id=:number"
         self._db.session.execute(sql, {"number": id})
         self._db.session.commit()
+
+    def edit_citation(self, id, form):
+        sql = """UPDATE citations SET
+                    citation_name=:citation_name,
+                    author=:author,
+                    title=:title,
+                    booktitle=:booktitle,
+                    series=:series,
+                    publisher=:publisher,
+                    school=:school,
+                    address=:address,
+                    journal=:journal,
+                    howpublished=:howpublished,
+                    year=:year,
+                    month=:month,
+                    volume=:volume,
+                    number=:number,
+                    pages=:pages,
+                    note=:note
+                WHERE id=:id"""
+
+        form = form.copy()
+        for key in form.keys():
+            if form[key] == "":
+                form[key] = None
+
+        self._db.session.execute(sql, {
+            "id": id,
+            "citation_name": form["citation_name"],
+            "author":  form["author"],
+            "title":  form["title"],
+            "booktitle":  form["booktitle"],
+            "series":  form["series"],
+            "publisher":  form["publisher"],
+            "school":  form["school"],
+            "address":  form["address"],
+            "journal":  form["journal"],
+            "howpublished":  form["howpublished"],
+            "year":  form["year"],
+            "month":  form["month"],
+            "volume":  form["volume"],
+            "number":  form["number"],
+            "pages":  form["pages"],
+            "note":  form["note"]
+        })
+        self._db.session.commit()
