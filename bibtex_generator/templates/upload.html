@@ -1,9 +1,13 @@
 {% extends "layout.html" %}
 {% block title %}Upload{% endblock %}
 {% block content %}
-
-
-
-
-
+<br>
+<h2>Upload Citation in BibTeX Form</h2>
+<br>
+<form action="/upload" method="POST">
+    <div class="form-group">
+        BibTeX: <br><textarea name="bibtex" rows="20" cols="50"></textarea>
+    </div>
+    <button type="submit" class="btn btn-warning">Upload</button>
+</form>
 {% endblock %}

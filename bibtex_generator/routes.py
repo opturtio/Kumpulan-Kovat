@@ -276,7 +276,9 @@ def result():
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
     if request.method == "GET":
-        return render_template("upload.html", citation = False)
+        return render_template("upload.html", citation=False)
 
     if request.method == "POST":
-        pass
+        bibtex_string = request.form["bibtex"]
+        print(bibtex_string)
+        return redirect("/upload")
