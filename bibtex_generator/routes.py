@@ -14,9 +14,14 @@ from repositories.citation_repository import CitationRepository
 citation_service = CitationService(CitationRepository(db))
 bibtex_service = BibtexService(citation_service)
 
-@app.route("/download")
+
+@app.route("/download", methods=["GET", "POST"])
 def download_file():
-    bibtex_service.generate_bibtex_file(citation_service.get_citations())
+    ids = request.form.getlist("selected")
+    int_ids = []
+    for x in ids:
+        int_ids.append(int(x))
+    bibtex_service.generate_bibtex_file(int_ids)
     cwd = os.getcwd()
     file_path = os.path.join(cwd, "references.bib")
     try:
@@ -283,11 +288,12 @@ def upload():
     if request.method == "POST":
         pass
 
+
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
     if request.method == "GET":
         data = citation_service.get_citation(id)
-        return render_template("edit.html", citation = False, data=data._asdict())
+        return render_template("edit.html", citation=False, data=data._asdict())
 
     if request.method == "POST":
         citation_service.edit_citation(id, request.form)

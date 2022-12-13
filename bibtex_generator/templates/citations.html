@@ -5,65 +5,47 @@
 <div class="d-flex aligns-items-center justify-content-center">
     <h2> Current citation amount: {{ count }}</h2>
 </div>
-<div class="d-flex aligns-items-center justify-content-center">
-    <a class="btn btn-warning my-1 me-1" href="/download">Download selected citations</a>
-</div>
+
 <br>
-
         <div class="mx-auto w-25 p-3">
-            {% for citation in citations %}
-                <div class="card shadow mb-4">
-
-                    <div class="form-check form-switch d-flex aligns-items-center justify-content-center">
-                        <input class="form-check-input" type="checkbox" role="switch" id={{citation[key]}} />
-                        <label class="form-check-label" for={{citation[key]}}></label>
-                    </div>
-
-                    <div class="card-body p-5">
-                        <h5 class="mb-4">Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a></h5>
-                            <ul class="list-bullets">
-                                {% for key in citation.keys() %}
-                                    {% if citation[key] and key != "id" and key != "citation_name" %}
-                                        <li class="mb-3"> <span style="text-transform:capitalize">{{key}}</span>: {{citation[key]}}</li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        <br>
-
-                        <div class="container d-flex aligns-items-center justify-content-center">
-                            <div class="row">
-
-                                <div class="col-4">
-                                    <form action="/citations" method="POST">
-                                        <button class="btn btn-warning col-15 mx-2" name="remove" type="sumbit" value="{{citation.id}}"> Remove </button>
-                                    </form>
-                                </div>
-
-                                <div class="col-4"></div>
-
-                                <div class="col-4">
-                                    <form action={{"/edit/" + citation.id|string }} method="GET">
-                                        <button class="btn btn-warning col-15 mx-2" name="edit" type="sumbit" value="{{citation.id}}"> Edit </button>
-                                    </form>
-                                </div>
-                            </div>
+            <form action="/download" method="POST">
+                <div class="d-flex aligns-items-center justify-content-center">
+                    <input class="btn btn-warning my-1 me-1" type="submit" value="Download selected citations">
+                </div>
+                {% for citation in citations %}
+                    <div class="card shadow mb-4">
+                        <div class="form-check form-switch d-flex aligns-items-center justify-content-center">
+                            <input class="form-check-input" type="checkbox" name="selected" value="{{citation.id}}"/>
                         </div>
 
+                        <div class="card-body p-5">
+                            <h5 class="mb-4">Citation: <a href="/citations/{{citation.id}}">{{citation.citation_name}}</a></h5>
+                                <ul class="list-bullets">
+                                    {% for key in citation.keys() %}
+                                        {% if citation[key] and key != "id" and key != "citation_name" %}
+                                            <li class="mb-3"> <span style="text-transform:capitalize">{{key}}</span>: {{citation[key]}}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                </ul>
+                            <br>
 
+                            <div class="container d-flex aligns-items-center justify-content-center">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <a class="btn btn-warning col-15 mx-2" href="/edit/{{citation.id}}"> Edit </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
-                </div>
-            <br>
-            {% endfor %}
-
+                <br>
+                {% endfor %}
+            </form>
             <div class="d-flex aligns-items-center justify-content-center">
-
-                            <a href="#top" class="btn btn-warning col-md-4 mx-xl-5" role="button">Top</a>
-
-                            <a href="/" class="btn btn-warning col-md-4 mx-xl-5" role="button">Return</a>
-
+                <a href="#top" class="btn btn-warning col-md-4 mx-xl-5" role="button">Top</a>
+                <a href="/" class="btn btn-warning col-md-4 mx-xl-5" role="button">Return</a>
             </div>
         </div>
-    
-
-
 {% endblock %}
