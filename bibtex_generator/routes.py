@@ -15,13 +15,24 @@ citation_service = CitationService(CitationRepository(db))
 bibtex_service = BibtexService(citation_service)
 
 
-@app.route("/download", methods=["GET", "POST"])
-def download_file():
+@app.route("/download-selected", methods=["GET", "POST"])
+def download_selected():
     ids = request.form.getlist("selected")
     int_ids = []
     for id in ids:
         int_ids.append(int(id))
     bibtex_service.generate_bibtex_file(int_ids)
+    cwd = os.getcwd()
+    file_path = os.path.join(cwd, "references.bib")
+    try:
+        return send_file(file_path, "references.bib", as_attachment=True)
+    except Exception as error:
+        return str(error)
+
+
+@app.route("/download-all")
+def download_all():
+    bibtex_service.generate_bibtex_file(citation_service.get_citations())
     cwd = os.getcwd()
     file_path = os.path.join(cwd, "references.bib")
     try:
