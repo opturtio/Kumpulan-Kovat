@@ -8,9 +8,10 @@
 
 <br>
         <div class="mx-auto w-25 p-3">
-            <form action="/download" method="POST">
+            <form action="/download-selected" method="POST">
                 <div class="d-flex aligns-items-center justify-content-center">
-                    <input class="btn btn-warning my-1 me-1" type="submit" value="Download selected citations">
+                    <input class="btn btn-warning my-1 me-1" type="submit" value="Download selected">
+                    <a class="btn btn-warning my-1 me-1" href="/download-all"> Download all </a>
                 </div>
                 {% for citation in citations %}
                     <div class="card shadow mb-4">
