@@ -3,10 +3,6 @@
 {% block content %}
 
 <title> {{citation.citation_name}} </title>
-<h3>Latex-form:</h3>
-<p>
-    [{{citation.id}}] {{citation.author}}, <i> {{citation.title}} </i>, {{citation.year}}
-</p>
 <p>
     <h3>Bibtex-form:</h3>
     {{bibtex_string|safe}}
