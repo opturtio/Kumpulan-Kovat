@@ -282,8 +282,16 @@ def upload():
 
     if request.method == "POST":
         bibtex_string = request.form["bibtex"]
-        print(bibtex_string)
-        return redirect("/upload")
+
+        try:
+            bibtex_service.upload_bibtex(bibtex_string)
+            return redirect("/upload")
+        except WrongAttributeTypeError as error:
+            return render_template(
+                "upload.html",
+                error_message = "Wrong types for: " + str(error)
+            )
+
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
