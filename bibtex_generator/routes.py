@@ -302,12 +302,11 @@ def upload():
         try:
             bibtex_service.upload_bibtex(bibtex_string)
             return redirect("/upload")
-        except WrongAttributeTypeError as error:
+        except AttributeError:
             return render_template(
                 "upload.html",
-                error_message = "Wrong types for: " + str(error)
+                error_message = "Citation in invalid BibTeX form"
             )
-
 
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
