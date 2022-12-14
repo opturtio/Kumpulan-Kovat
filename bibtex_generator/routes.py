@@ -278,10 +278,20 @@ def result():
 @app.route("/upload", methods=["GET", "POST"])
 def upload():
     if request.method == "GET":
-        return render_template("upload.html", citation = False)
+        return render_template("upload.html", citation=False)
 
     if request.method == "POST":
-        pass
+        bibtex_string = request.form["bibtex"]
+
+        try:
+            bibtex_service.upload_bibtex(bibtex_string)
+            return redirect("/upload")
+        except WrongAttributeTypeError as error:
+            return render_template(
+                "upload.html",
+                error_message = "Wrong types for: " + str(error)
+            )
+
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
