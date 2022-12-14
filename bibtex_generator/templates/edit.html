@@ -18,5 +18,11 @@
         Edit values
     </a>
 </form>
+<div class="col-4"> </div>
+<div class="col-4">
+    <form action="/citations" method="POST">
+        <button class="btn btn-warning col-15 mx-2" name="remove" type="submit" value="{{data.id}}"> Remove </button>
+    </form>
+</div>
 
 {% endblock %}
