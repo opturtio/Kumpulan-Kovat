@@ -3,6 +3,9 @@
 {% block content %}
 <br>
 <h2>Upload Citation in BibTeX Form</h2>
+{% if error_message %}
+    <p class=error><strong>Error:</strong> {{ error_message }}
+{% endif %}
 <br>
 <form action="/upload" method="POST">
     <div class="form-group">

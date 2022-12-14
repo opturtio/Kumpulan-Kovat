@@ -4,7 +4,7 @@ from unittest.mock import Mock
 from services import BibtexService
 from entities import Citation
 
-class TestBibtexFromatter(unittest.TestCase):
+class TestBibtexService(unittest.TestCase):
     def setUp(self):
         self.citation_service = Mock()
         self.citation_service.get_citation.return_value = {"test_a" : 1, "test_b" : 2, "test_c" : 3, "test_d" : 4}
@@ -72,3 +72,188 @@ class TestBibtexFromatter(unittest.TestCase):
             text = file.read()
             for key in self.citations:
                 self.assertIn(key.bib, text)
+
+    def test_parse_type_parses_the_type_correctly(self):
+        bibtex_string = '''@book{book1
+            author: "author1"
+            title: "title1"
+            publisher: "publisher1"
+            address: "address1"
+            year: "2001"
+        }
+        '''
+        self.assertEqual(self.bibtex_service._parse_type(bibtex_string), "book")
+
+    def test_parse_name_parses_the_name_correctly(self):
+        bibtex_string = '''@book{book1
+            author: "author1"
+            title: "title1"
+            publisher: "publisher1"
+            address: "address1"
+            year: "2001"
+        }
+        '''
+        self.assertEqual(self.bibtex_service._parse_name(bibtex_string), "book1")
+
+    def test_parse_book_parses_the_citation_field_correctly(self):
+        bibtex_string = '''@book{book1
+            author: "author1"
+            title: "title1"
+            publisher: "publisher1"
+            address: "address1"
+            year: "2001"
+        }
+        '''
+        return_value = self.bibtex_service._parse_book(bibtex_string).items()
+        self.assertIn(('author', 'author1'), return_value)
+        self.assertIn(('title', 'title1'), return_value)
+        self.assertIn(('publisher', 'publisher1'), return_value)
+        self.assertIn(('address', 'address1'), return_value)
+        self.assertIn(('year', '2001'), return_value)
+
+    def test_parse_article_parses_the_citation_field_correctly(self):
+        bibtex_string = '''@article{article1
+            author: "author1"
+            title: "title1"
+            journal: "journal1"
+            year: "2001"
+            volume: "1"
+            number: "1"
+            pages: "1"
+        }
+        '''
+
+        return_value = self.bibtex_service._parse_article(bibtex_string).items()
+        self.assertIn(('author', 'author1'), return_value)
+        self.assertIn(('title', 'title1'), return_value)
+        self.assertIn(('journal', 'journal1'), return_value)
+        self.assertIn(('year', '2001'), return_value)
+        self.assertIn(('volume', '1'), return_value)
+        self.assertIn(('number', '1'), return_value)
+        self.assertIn(('pages', '1'), return_value)
+
+    def test_parse_misc_parses_the_citation_field_correctly(self):
+        bibtex_string = '''@misc{misc1
+            author: "author1"
+            title: "title1"
+            howpublished: "somehow"
+            year: "2001"
+            note: "note1"
+        }
+        '''
+
+        return_value = self.bibtex_service._parse_misc(bibtex_string).items()
+        self.assertIn(('author', 'author1'), return_value)
+        self.assertIn(('title', 'title1'), return_value)
+        self.assertIn(('howpublished', 'somehow'), return_value)
+        self.assertIn(('year', '2001'), return_value)
+        self.assertIn(('note', 'note1'), return_value)
+
+    def test_parse_phdthesis_parses_the_citation_field_correctly(self):
+        bibtex_string = '''@phdthesis{phdthesis1
+            author: "author1"
+            title: "title1"
+            school: "school1"
+            address: "address1"
+            year: "2001"
+            month: "January"
+        }
+        '''
+
+        return_value = self.bibtex_service._parse_phdthesis(bibtex_string).items()
+        self.assertIn(('author', 'author1'), return_value)
+        self.assertIn(('title', 'title1'), return_value)
+        self.assertIn(('school', 'school1'), return_value)
+        self.assertIn(('address', 'address1'), return_value)
+        self.assertIn(('year', '2001'), return_value)
+        self.assertIn(('month', 'January'), return_value)
+
+    def test_parse_inproceedings_parses_the_citation_field_correctly(self):
+        bibtex_string = '''@inproceedings{inproceedings1
+            author: "author1"
+            title: "title1"
+            booktitle: "book title 1"
+            series: "series1"
+            publisher: "publisher1"
+            address: "address1"
+            year: "2001"
+            pages: "1"
+        }
+        '''
+
+        return_value = self.bibtex_service._parse_inproceedings(bibtex_string).items()
+        self.assertIn(('author', 'author1'), return_value)
+        self.assertIn(('title', 'title1'), return_value)
+        self.assertIn(('booktitle', 'book title 1'), return_value)
+        self.assertIn(('series', 'series1'), return_value)
+        self.assertIn(('publisher', 'publisher1'), return_value)
+        self.assertIn(('address', 'address1'), return_value)
+        self.assertIn(('year', '2001'), return_value)
+        self.assertIn(('pages', '1'), return_value)
+
+    def test_upload_bibtex_calls_right_method_of_citation_service_when_citation_type_is_book(self):
+        bibtex_string = '''@book{book1
+            author: "author1"
+            title: "title1"
+            publisher: "publisher1"
+            address: "address1"
+            year: "2001"
+        }
+        '''
+        self.bibtex_service.upload_bibtex(bibtex_string)
+        self.citation_service.create_book_citation.assert_called()
+
+    def test_upload_bibtex_calls_right_method_of_citation_service_when_citation_type_is_article(self):
+        bibtex_string = '''@article{article1
+            author: "author1"
+            title: "title1"
+            journal: "journal1"
+            year: "2001"
+            volume: "1"
+            number: "1"
+            pages: "1"
+        }
+        '''
+        self.bibtex_service.upload_bibtex(bibtex_string)
+        self.citation_service.create_article_citation.assert_called()
+
+    def test_upload_bibtex_calls_right_of_method_citation_service_when_citation_type_is_misc(self):
+        bibtex_string = '''@misc{misc1
+            author: "author1"
+            title: "title1"
+            howpublished: "somehow"
+            year: "2001"
+            note: "note1"
+        }
+        '''
+        self.bibtex_service.upload_bibtex(bibtex_string)
+        self.citation_service.create_misc_citation.assert_called()
+
+    def test_upload_bibtex_calls_right_method_of_citation_service_when_citation_type_is_phdthesis(self):
+        bibtex_string = '''@phdthesis{phdthesis1
+            author: "author1"
+            title: "title1"
+            school: "school1"
+            address: "address1"
+            year: "2001"
+            month: "January"
+        }
+        '''
+        self.bibtex_service.upload_bibtex(bibtex_string)
+        self.citation_service.create_phdthesis_citation.assert_called()
+
+
+    def test_upload_bibtex_calls_right_method_of_citation_service_when_citation_type_is_inproceedings(self):
+        bibtex_string = '''@inproceedings{inproceedings1
+            author: "author1"
+            title: "title1"
+            booktitle: "book title 1"
+            series: "series1"
+            publisher: "publisher1"
+            address: "address1"
+            year: "2001"
+            pages: "1"
+        }
+        '''
+        self.bibtex_service.upload_bibtex(bibtex_string)
+        self.citation_service.create_inproceedings_citation.assert_called()
