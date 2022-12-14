@@ -2,9 +2,8 @@ import re
 from entities import create_bibtex_citation, Citation
 from services import CitationService
 
-
 class BibtexService:
-    def __init__(self, service: CitationService, bibtex_formatter=create_bibtex_citation):
+    def __init__(self, service: CitationService, bibtex_formatter = create_bibtex_citation):
         self._service = service
         self.bibtex_formatter = bibtex_formatter
 
@@ -16,8 +15,7 @@ class BibtexService:
         return citations
 
     def _convert_to_citation(self, data):
-        citation = Citation(
-            **{k: v for k, v in dict(data).items() if v is not None})
+        citation = Citation(**{k: v for k, v in dict(data).items() if v is not None})
         return citation
 
     def _convert_citations_to_bibtex(self, citations):
@@ -118,82 +116,51 @@ class BibtexService:
 
     def _parse_book(self, bibtex_string):
         field_values = {}
-        field_values["author"] = re.search(
-            r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
-        field_values["title"] = re.search(
-            r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
-        field_values["publisher"] = re.search(
-            r'publisher:\s".*"', bibtex_string).group()[len('publisher: "'):-1]
-        field_values["address"] = re.search(
-            r'address:\s".*"', bibtex_string).group()[len('address: "'):-1]
-        field_values["year"] = re.search(
-            r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]
+        field_values["author"] = re.search(r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
+        field_values["title"] = re.search(r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
+        field_values["publisher"] = re.search(r'publisher:\s".*"', bibtex_string).group()[len('publisher: "'):-1]
+        field_values["address"] = re.search(r'address:\s".*"', bibtex_string).group()[len('address: "'):-1]
+        field_values["year"] = re.search(r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]
         return field_values
 
     def _parse_article(self, bibtex_string):
         field_values = {}
-        field_values["author"] = re.search(
-            r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
-        field_values["title"] = re.search(
-            r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
-        field_values["journal"] = re.search(
-            r'journal:\s".*"', bibtex_string).group()[len('journal: "'):-1]
-        field_values["year"] = re.search(
-            r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]
-        field_values["volume"] = re.search(
-            r'volume:\s".*"', bibtex_string).group()[len('volume: "'):-1]
-        field_values["number"] = re.search(
-            r'number:\s".*"', bibtex_string).group()[len('number: "'):-1]
-        field_values["pages"] = re.search(
-            r'pages:\s".*"', bibtex_string).group()[len('pages: "'):-1]
+        field_values["author"] = re.search(r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
+        field_values["title"] = re.search(r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
+        field_values["journal"] = re.search(r'journal:\s".*"', bibtex_string).group()[len('journal: "'):-1]
+        field_values["year"] = re.search(r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]
+        field_values["volume"] = re.search(r'volume:\s".*"', bibtex_string).group()[len('volume: "'):-1]
+        field_values["number"] = re.search(r'number:\s".*"', bibtex_string).group()[len('number: "'):-1]
+        field_values["pages"] = re.search(r'pages:\s".*"', bibtex_string).group()[len('pages: "'):-1]
         return field_values
 
     def _parse_misc(self, bibtex_string):
         field_values = {}
-        field_values["author"] = re.search(
-            r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
-        field_values["title"] = re.search(
-            r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
-        field_values["howpublished"] = re.search(
-            r'howpublished:\s".*"', bibtex_string).group()[len('howpublished: "'):-1]
-        field_values["year"] = re.search(
-            r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]
-        field_values["note"] = re.search(
-            r'note:\s".*"', bibtex_string).group()[len('note: "'):-1]
+        field_values["author"] = re.search(r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
+        field_values["title"] = re.search(r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
+        field_values["howpublished"] = re.search(r'howpublished:\s".*"', bibtex_string).group()[len('howpublished: "'):-1]
+        field_values["year"] = re.search(r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]
+        field_values["note"] = re.search(r'note:\s".*"', bibtex_string).group()[len('note: "'):-1]
         return field_values
 
     def _parse_phdthesis(self, bibtex_string):
         field_values = {}
-        field_values["author"] = re.search(
-            r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
-        field_values["title"] = re.search(
-            r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
-        field_values["school"] = re.search(
-            r'school:\s".*"', bibtex_string).group()[len('school: "'):-1]
-        field_values["address"] = re.search(
-            r'address:\s".*"', bibtex_string).group()[len('address: "'):-1]
-        field_values["year"] = re.search(
-            r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]
-        field_values["month"] = re.search(
-            r'month:\s".*"', bibtex_string).group()[len('month: "'):-1]
+        field_values["author"] = re.search(r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
+        field_values["title"] = re.search(r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
+        field_values["school"] = re.search(r'school:\s".*"', bibtex_string).group()[len('school: "'):-1]
+        field_values["address"] = re.search(r'address:\s".*"', bibtex_string).group()[len('address: "'):-1]
+        field_values["year"] = re.search(r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]
+        field_values["month"] = re.search(r'month:\s".*"', bibtex_string).group()[len('month: "'):-1]
         return field_values
 
     def _parse_inproceedings(self, bibtex_string):
         field_values = {}
-        field_values["author"] = re.search(
-            r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
-        field_values["title"] = re.search(
-            r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
-        field_values["booktitle"] = re.search(
-            r'booktitle:\s".*"', bibtex_string).group()[len('booktitle: "'):-1]
-        field_values["series"] = re.search(
-            r'series:\s".*"', bibtex_string).group()[len('series: "'):-1]
-        field_values["publisher"] = re.search(
-            r'publisher:\s".*"', bibtex_string).group()[len('publisher: "'):-1]
-        field_values["address"] = re.search(
-            r'address:\s".*"', bibtex_string).group()[len('address: "'):-1]
-        field_values["year"] = re.search(
-            r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]
-        field_values["pages"] = re.search(
-            r'pages:\s".*"', bibtex_string).group()[len('pages: "'):-1]
+        field_values["author"] = re.search(r'author:\s".*"', bibtex_string).group()[len('author: "'):-1]
+        field_values["title"] = re.search(r'title:\s".*"', bibtex_string).group()[len('title: "'):-1]
+        field_values["booktitle"] = re.search(r'booktitle:\s".*"', bibtex_string).group()[len('booktitle: "'):-1]
+        field_values["series"] = re.search(r'series:\s".*"', bibtex_string).group()[len('series: "'):-1]
+        field_values["publisher"] = re.search(r'publisher:\s".*"', bibtex_string).group()[len('publisher: "'):-1]
+        field_values["address"] = re.search(r'address:\s".*"', bibtex_string).group()[len('address: "'):-1]        
+        field_values["year"] = re.search(r'year:\s".*"', bibtex_string).group()[len('year: "'):-1]        
+        field_values["pages"] = re.search(r'pages:\s".*"', bibtex_string).group()[len('pages: "'):-1]
         return field_values

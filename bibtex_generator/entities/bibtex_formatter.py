@@ -2,7 +2,6 @@ import html
 from pylatexenc.latexencode import unicode_to_latex
 from entities.citation import Citation
 
-
 def create_bibtex_citation(citation):
     if isinstance(citation, Citation):
         citation = citation.get_data()
@@ -16,10 +15,8 @@ def create_bibtex_citation(citation):
 
     return bibtex_string
 
-
 def create_bibtex_citation_html(citation):
     bibtex_string = create_bibtex_citation(citation)
     bibtex_string = html.escape(bibtex_string)
-    bibtex_string = bibtex_string.replace(
-        "\n", "<br>").replace("\t", "&emsp;&emsp;")
+    bibtex_string = bibtex_string.replace("\n", "<br>").replace("\t", "&emsp;&emsp;")
     return bibtex_string
