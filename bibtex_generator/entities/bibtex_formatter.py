@@ -7,10 +7,10 @@ def create_bibtex_citation(citation):
         citation = citation.get_data()
     type_key = "type"
     name_key = "citation_name"
-    bibtex_string = f"@{citation[type_key]}{{{citation[name_key]}\n"
+    bibtex_string = f"@{citation[type_key]}{{{citation[name_key]},\n"
     for key in citation.keys():
         if key != "id" and key != "citation_name" and key != "type" and citation[key]:
-            bibtex_string += f"\t{key}: \"{unicode_to_latex(citation[key])}\"\n"
+            bibtex_string += f"\t{key} = \"{unicode_to_latex(citation[key])}\",\n"
     bibtex_string += "}"
 
     return bibtex_string
