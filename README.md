@@ -3,7 +3,8 @@
 [![codecov](https://codecov.io/gh/opturtio/Kumpulan-Kovat/branch/main/graph/badge.svg)](https://codecov.io/gh/opturtio/Kumpulan-Kovat)  
 [Deployed product](https://bibtex-generator.fly.dev/)\
 [Backlog](https://docs.google.com/spreadsheets/d/1yvGNC3GYo8Uez8AEf1WDs8b2HU5dlRqFfppQ7lEhM3Y/edit?usp=sharing)  
-[Retrospektiivi 1](/documents/RETRO.md)
+[Retrospektiivit](/documents/RETRO.md)\
+**[Loppuraportti](https://docs.google.com/document/d/1Dcc5sjZWAT9LhuBdga6roPLIJyquHs_foNhIr7RgoMw/edit?usp=sharing)**
 ## Definition of Done
 
 The acceptance criteria of the user story have been implemented.\
